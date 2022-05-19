@@ -46,7 +46,7 @@
 - 관련 이미지  
   <img src="./img/쿠키런.png">
   
-  <img src="./img/.png">
+  <img src="./img/공룡게임.png">
 
 
 
