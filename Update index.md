@@ -92,7 +92,7 @@
     {
         
 
-        if (Input.GetMouseButtonDown(0) && GameM.instance.isPlay) // 화면이 터치 될 때 점프 / 버튼이 누르는 순간에만 점프
+        if (Input.GetMouseButtonDown(0) && GameM.instance.isPlay) // 화면이 터치되는 순간에만 점프
         {
             isJump = true; // 터치가 이루어지면 참
         }
@@ -151,7 +151,7 @@
                     tiles[i].sprite = groundImg[Random.Range(0, groundImg.Length)];
                 }
             }
-            for (int i = 0; i < tiles.Length; i++) //타일의 개수만큼 돌림
+            for (int i = 0; i < tiles.Length; i++) 
             {
                 tiles[i].transform.Translate(new Vector2(-1, 0) * Time.deltaTime * GameM.instance.gameSpeed); // 타일을 좌측으로 이동되게 함.
             }
