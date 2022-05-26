@@ -125,16 +125,6 @@
 
 ## GroundScroller Script 
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GroundScroller : MonoBehaviour
-{
-    public SpriteRenderer[] tiles; // 그라운드를 담을 스크립트 렌더 선언
-    public Sprite[] groundImg;
-    public float speed;
-
     void Start()
     {
         temp = tiles[0];
