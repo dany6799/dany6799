@@ -79,7 +79,85 @@
 4. 앞에서 다가오는 장애물을 피하는 단순한 게임이므로 진입장벽이 낮아서 튜토리얼없이 빠르게 게임에 진입가능하다. 
 
 [기술]
-1. Unity 
+- Unity 
+- 
+ using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    bool isJump = false;
+    bool isTop = false;
+    public float jumpHeight = 0;
+    public float jumpSpeed = 0;
+
+    Vector2 startPosition;
+    Animator animator;
+
+    public GameObject dfx;
+    //public GameObject Player;
+
+    void Start()
+    {
+        startPosition = transform.position; // 스타트포지션 함수에서 스크립트가 실행될 때 오브젝트에 현재 포지션으로 스타트 포지션을 초기화
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (GameM.instance.isPlay)
+        {
+            animator.SetBool("run", true);
+        }
+        else
+        {
+            animator.SetBool("run", false);
+        }
+
+        if (Input.GetMouseButtonDown(0) && GameM.instance.isPlay) // 화면이 터치 될 때 점프 / 버튼이 누르는 순간에만 점프
+        {
+            isJump = true; // 터치가 이루어지면 참
+        }
+        else if (transform.position.y <= startPosition.y) // 플레이어가 계속 내려가다가 스타트포지션보다 낮은 위치에 오면
+        {
+            isJump = false;
+            isTop = false; 
+            transform.position = startPosition; // 현재 포지션을 스타트 포지션으로 초기화
+        }
+
+        if (isJump)
+        {
+            if (transform.position.y <= jumpHeight - 0.1f && !isTop)
+            {
+
+                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime); // 원하는 높이만큼 플레이어 점프하게 끔 jumpHeight : 올라갈 높이
+            }
+            else
+            {
+                isTop = true; 
+            }
+            if (transform.position.y > startPosition.y && isTop)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime); // 플레이어가 스타트 포지션보다 위에 있을 때 플레이어를 스타트포지션으로 옮겨준다.
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Mob"))
+        {
+            GameObject dead = Instantiate(dfx);
+            //Destroy(gameObject);
+            Destroy(dfx);
+
+            dead.transform.position = transform.position;
+            
+            GameM.instance.GameOver();
+        }
+    }
+}
 
 ## 2. 이야기
 
