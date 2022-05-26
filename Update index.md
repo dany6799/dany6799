@@ -123,7 +123,7 @@
         }
     }
 
-## GroundScroller Script 
+## GroundScroller Script 다리 설정
 
     void Start()
     {
