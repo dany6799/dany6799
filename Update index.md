@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 {
     bool isJump = false;
     bool isTop = false;
-    public float jumpHeight = 0;
+    public float jumpHeight = 0; //올라갈 높이
     public float jumpSpeed = 0;
 
     Vector2 startPosition;
@@ -131,7 +131,8 @@ public class PlayerController : MonoBehaviour
             if (transform.position.y <= jumpHeight - 0.1f && !isTop)
             {
 
-                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime); // 원하는 높이만큼 플레이어 점프하게 끔 jumpHeight : 올라갈 높이
+                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x, jumpHeight), jumpSpeed * Time.deltaTime); 
+                // 원하는 높이만큼 플레이어 점프하게 끔 
             }
             else
             {
@@ -139,7 +140,8 @@ public class PlayerController : MonoBehaviour
             }
             if (transform.position.y > startPosition.y && isTop)
             {
-                transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime); // 플레이어가 스타트 포지션보다 위에 있을 때 플레이어를 스타트포지션으로 옮겨준다.
+                transform.position = Vector2.MoveTowards(transform.position, startPosition, jumpSpeed * Time.deltaTime); 
+                // 플레이어가 스타트 포지션보다 위에 있을 때 플레이어를 스타트포지션으로 옮겨준다.
             }
         }
     }
