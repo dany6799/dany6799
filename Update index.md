@@ -123,6 +123,52 @@
         }
     }
 
+## GroundScroller Script 
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GroundScroller : MonoBehaviour
+{
+    public SpriteRenderer[] tiles; // 그라운드를 담을 스크립트 렌더 선언
+    public Sprite[] groundImg;
+    public float speed;
+
+    void Start()
+    {
+        temp = tiles[0];
+    }
+    SpriteRenderer temp;
+
+    void Update()
+    {
+        if (GameM.instance.isPlay)
+        {
+            for (int i = 0; i < tiles.Length; i++) 
+            {
+                if (-5 >= tiles[i].transform.position.x) // 타일 포지션의 x 좌표가 –5보다 작을 때 가장 뒤에 있는 타일을 검색해 가작 뒤 타일보다 x좌표를 –1만큼 뒤로 보내준다.
+                {
+                    for (int q = 0; q < tiles.Length; q++) // 현재 파일과 변수에 저장된 파일의 x좌표를 비교하면서 
+                    {
+                        if (temp.transform.position.x < tiles[q].transform.position.x) //현재타일이 변수 temp보다 x좌표가 크면 
+                        {
+                            temp = tiles[q]; //변수의 타일을 현재 타일로 초기화해 준다.
+                        }
+                    }
+                    tiles[i].transform.position = new Vector2(temp.transform.position.x + 1, -0.8f); 
+                    // x좌표가 –5보다 넘어버린 타일을 제일 뒤로 넘어주고 스프라이트 배열을 선언한 뒤에 제일 뒤로 보낸 타일의 스프라이트를 스프라이트 배열 중 한 개로 랜덤하게 바꿔준다.
+                    tiles[i].sprite = groundImg[Random.Range(0, groundImg.Length)];
+                }
+            }
+            for (int i = 0; i < tiles.Length; i++) //타일의 개수만큼 돌림
+            {
+                tiles[i].transform.Translate(new Vector2(-1, 0) * Time.deltaTime * GameM.instance.gameSpeed); // 타일을 좌측으로 이동되게 함.
+            }
+        }
+
+    }
+}
  
 
 
