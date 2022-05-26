@@ -80,22 +80,8 @@
 
 [기술]
 - Unity 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    bool isJump = false;
-    bool isTop = false;
-    public float jumpHeight = 0; //올라갈 높이
-    public float jumpSpeed = 0;
-
-    Vector2 startPosition;
-    Animator animator;
-
-    public GameObject dfx;
-    //public GameObject Player;
+1. PlayerController Script 중 점프
 
     void Start()
     {
@@ -105,14 +91,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameM.instance.isPlay)
-        {
-            animator.SetBool("run", true);
-        }
-        else
-        {
-            animator.SetBool("run", false);
-        }
+        
 
         if (Input.GetMouseButtonDown(0) && GameM.instance.isPlay) // 화면이 터치 될 때 점프 / 버튼이 누르는 순간에만 점프
         {
@@ -145,20 +124,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Mob"))
-        {
-            GameObject dead = Instantiate(dfx);
-            //Destroy(gameObject);
-            Destroy(dfx);
+ 
 
-            dead.transform.position = transform.position;
-            
-            GameM.instance.GameOver();
-        }
-    }
-}
 
 ## 2. 이야기
 
