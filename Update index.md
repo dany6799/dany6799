@@ -86,7 +86,6 @@
     void Start()
     {
         startPosition = transform.position; // 스타트포지션 함수에서 스크립트가 실행될 때 오브젝트에 현재 포지션으로 스타트 포지션을 초기화
-        animator = GetComponent<Animator>();
     }
 
     void Update()
